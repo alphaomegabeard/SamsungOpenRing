@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- DEBUG-ONLY overlay: registers the Claude Bridge (loopback control surface).
-         Merged only into debug builds, so it can never ship in a release APK. -->
-    <application
-        android:name=".ClaudeBridgeApp"
-        tools:replace="android:name">
+    <!--
+      Debug builds used to auto-start the developer-only Claude Bridge service.
+      That service can start before runtime Bluetooth/notification permissions are
+      granted and crash on newer Android versions. Keep the debug source set, but
+      do not register or auto-start the bridge in installable builds.
+    -->
 
-        <service
-            android:name=".ClaudeBridgeService"
-            android:exported="true"
-            android:foregroundServiceType="connectedDevice" />
-
-    </application>
 </manifest>
